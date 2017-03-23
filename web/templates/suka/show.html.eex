@@ -1,0 +1,23 @@
+<h2>Show suka</h2>
+
+<ul>
+
+  <li>
+    <strong>Foto:</strong>
+    <%= @suka.foto_id %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @suka.user_id %>
+  </li>
+
+  <li>
+    <strong>Is suka:</strong>
+    <%= @suka.is_suka %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: suka_path(@conn, :edit, @suka) %>
+<%= link "Back", to: suka_path(@conn, :index) %>

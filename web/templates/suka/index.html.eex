@@ -1,0 +1,30 @@
+<h2>Listing suka</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Foto</th>
+      <th>User</th>
+      <th>Is suka</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for suka <- @suka do %>
+    <tr>
+      <td><%= suka.foto_id %></td>
+      <td><%= suka.user_id %></td>
+      <td><%= suka.is_suka %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: suka_path(@conn, :show, suka), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: suka_path(@conn, :edit, suka), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: suka_path(@conn, :delete, suka), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New suka", to: suka_path(@conn, :new) %>

@@ -1,0 +1,23 @@
+<h2>Show kegiatan</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @kegiatan.name %>
+  </li>
+
+  <li>
+    <strong>Tahun:</strong>
+    <%= @kegiatan.tahun %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @kegiatan.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: kegiatan_path(@conn, :edit, @kegiatan) %>
+<%= link "Back", to: kegiatan_path(@conn, :index) %>

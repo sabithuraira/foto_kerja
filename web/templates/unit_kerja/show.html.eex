@@ -1,0 +1,18 @@
+<h2>Show unit kerja</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @unit_kerja.name %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @unit_kerja.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: unit_kerja_path(@conn, :edit, @unit_kerja) %>
+<%= link "Back", to: unit_kerja_path(@conn, :index) %>

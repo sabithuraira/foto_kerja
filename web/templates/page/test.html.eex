@@ -1,0 +1,151 @@
+<!-- 
+2017032101492238.jpeg
+2017032102084938.jpeg
+-->
+<div class="modal show" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close"><span aria-hidden="true">&times;</span></button>
+        Bidang IPDS - Pengolahan SE2016
+      </div>
+      
+      <div class="modal-body">
+
+
+
+        <div class="row">
+            <div class="media">
+                <div class="media-left">
+                    <img id="full-img" class="mediaimg" src="media/2017032101492238.jpeg" alt={this.props.data.description} />
+                </div>
+                <div class="media-body">
+                    <b>Sabit Huraira</b>
+                    <div  id="full-capt" class="detail-caption">
+                        <p> 
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                        </p>
+                        <div class="ratings">
+                            <p>
+                                <span class="glyphicon glyphicon-heart"></span>
+                                Sabit Huraira, Hardianto dan 15 orang lainnya
+                            </p>
+                        </div>
+                        <!-- -->
+                        <div class="detailBox">
+                            <div class="actionBox">
+                                <ul class="commentList">
+                                    <li>
+                                        <div class="commentText">
+                                            <p class=""><b>Sabit</b> Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="commentText">
+                                            <p class=""><b>Snowden</b> Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="commentText">
+                                            <p class=""><b>temudgin</b> Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div class="commentText">
+                                            <p class=""><b>temudgin</b> Hello this is a test comment.</p> <span class="date sub-text">on March 5th, 2014</span>
+
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- -->
+                    </div>
+
+                    <div class="input-group nav-form">
+                        <input type="text" class="form-control"
+                            placeholder="Komentar anda.." />
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <i class="glyphicon glyphicon-floppy-disk"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function() {
+    var img = document.getElementById('full-img');
+    img.onload = function() {
+        if(img.height > img.width) {
+            img.style.height = '350px';
+            img.style.width = 'auto';
+        }
+        else{
+            img.style.width = "525px";
+            img.style.height = "auto";
+        }
+
+        var img_height;
+
+        if(img.offsetHeight) {
+            img_height=img.offsetHeight;
+
+        } else if(img.style.pixelHeight) {
+            img_height=img.style.pixelHeight;
+        }
+
+        img_height-=57;
+        var capt = document.getElementById('full-capt');
+        capt.style.height=img_height+"px";
+    };
+}());
+</script>
+
+
+            <div className="row">
+                <div className="media thumbnail">
+                    <div className="media-left">
+                        <img id="full-img" className="mediaimg" src={"media/"+this.props.data.file_name} alt={this.props.data.description} />
+                    </div>
+                    <div className="media-body">
+                        <b>Sabit Huraira</b>
+                        <div  id="full-capt" className="detail-caption">
+                            <p>{this.props.data.description}</p>
+                            <p><a href="#">#Bidang IPDS #Pengolahan SE2016</a></p>
+                            <div className="ratings">
+                                <p>
+                                    <span className="glyphicon glyphicon-heart"></span>
+                                    Sabit Huraira, Hardianto dan 15 orang lainnya
+                                </p>
+                            </div>
+                            <CommentBox comments={data.comments} />
+                        </div>
+
+                        <div className="input-group nav-form">
+                            <input type="text" className="form-control"
+                                placeholder="Komentar anda.." />
+                            <div className="input-group-btn">
+                                <button className="btn btn-default" type="button">
+                                    <i className="glyphicon glyphicon-floppy-disk"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

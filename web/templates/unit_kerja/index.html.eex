@@ -1,0 +1,80 @@
+<div id="index_action">
+  <h2>Listing unit kerja</h2>
+    <div class="form-group">
+      <label class="control-label">Keyword</label>
+      <input type="text" v-model="keyword" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <button v-on:click="searchData()" class="btn btn-primary">Search</button>
+    </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>User</th>
+
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <tr v-for="unit_kerja in unit_kerjas">
+        <td>{{unit_kerja.name}}</td>
+        <td>{{unit_kerja.user_id}}</td>
+
+        <td class="text-right">
+          <a v-bind:href="'unitkerja/'+unit_kerja.id" class="btn btn-default btn-xs">Show</a>
+          <a v-bind:href="'unitkerja/edit/'+unit_kerja.id" class="btn btn-default btn-xs">Edit</a>
+        </td>
+    </tr>
+
+  <!--
+  <%= for unit_kerja <- @unit_kerja do %>
+      <tr>
+        <td><%= unit_kerja.name %></td>
+        <td><%= unit_kerja.user_id %></td>
+
+        <td class="text-right">
+          <%= link "Show", to: unit_kerja_path(@conn, :show, unit_kerja), class: "btn btn-default btn-xs" %>
+          <%= link "Edit", to: unit_kerja_path(@conn, :edit, unit_kerja), class: "btn btn-default btn-xs" %>
+          <%= link "Delete", to: unit_kerja_path(@conn, :delete, unit_kerja), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        </td>
+      </tr>
+  <% end %>
+  -->
+    </tbody>
+  </table>
+
+  <%= link "New unit kerja", to: unit_kerja_path(@conn, :new) %>
+</div>
+
+<script>
+var data_table = new Vue({
+  el: '#index_action',
+  data: {
+    unit_kerjas: [],
+    keyword:""
+  },
+  methods: {
+    searchData: function () {
+      var url_default='unitkerja/search/'+this.keyword; 
+      if(this.keyword=="") 
+        url_default='unitkerja/search/-';
+    
+      this.$http.get(url_default).then(function (response) {
+        this.unit_kerjas=response.data;
+      })
+    },
+    say: function (message) {
+      alert(message)
+    }
+  },
+  created: function () {
+    this.$http.get('/unitkerja/search/-').then(function (response) {
+      this.unit_kerjas = response.data
+    })
+  }
+})
+</script>

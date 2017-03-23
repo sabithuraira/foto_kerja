@@ -1,0 +1,6 @@
+<h2>Edit komentar</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: komentar_path(@conn, :update, @komentar) %>
+
+<%= link "Back", to: komentar_path(@conn, :index) %>

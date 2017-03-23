@@ -1,0 +1,30 @@
+<h2>Listing komentar</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Foto</th>
+      <th>User</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for komentar <- @komentar do %>
+    <tr>
+      <td><%= komentar.foto_id %></td>
+      <td><%= komentar.user_id %></td>
+      <td><%= komentar.description %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: komentar_path(@conn, :show, komentar), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: komentar_path(@conn, :edit, komentar), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: komentar_path(@conn, :delete, komentar), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New komentar", to: komentar_path(@conn, :new) %>

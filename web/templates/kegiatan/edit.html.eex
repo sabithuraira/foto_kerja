@@ -1,0 +1,6 @@
+<h2>Edit kegiatan</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: kegiatan_path(@conn, :update, @kegiatan) %>
+
+<%= link "Back", to: kegiatan_path(@conn, :index) %>

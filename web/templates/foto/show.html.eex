@@ -1,0 +1,33 @@
+<h2>Show foto</h2>
+
+<ul>
+
+  <li>
+    <strong>File name:</strong>
+    <%= @foto.file_name %>
+  </li>
+
+  <li>
+    <strong>Unit kerja:</strong>
+    <%= @foto.unit_kerja_id %>
+  </li>
+
+  <li>
+    <strong>Kegiatan:</strong>
+    <%= @foto.kegiatan_id %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @foto.user_id %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @foto.description %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: foto_path(@conn, :edit, @foto) %>
+<%= link "Back", to: foto_path(@conn, :index) %>

@@ -1,0 +1,34 @@
+<h2>Listing foto</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>File name</th>
+      <th>Unit kerja</th>
+      <th>Kegiatan</th>
+      <th>User</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for foto <- @foto do %>
+    <tr>
+      <td><%= foto.file_name %></td>
+      <td><%= foto.unit_kerja_id %></td>
+      <td><%= foto.kegiatan_id %></td>
+      <td><%= foto.user_id %></td>
+      <td><%= foto.description %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: foto_path(@conn, :show, foto), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: foto_path(@conn, :edit, foto), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: foto_path(@conn, :delete, foto), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New foto", to: foto_path(@conn, :new) %>

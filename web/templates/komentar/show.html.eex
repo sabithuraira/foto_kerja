@@ -1,0 +1,22 @@
+<h2>Show komentar</h2>
+
+<ul>
+
+  <li>
+    <strong>Foto:</strong>
+    <%= @komentar.foto_id %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @komentar.user_id %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @komentar.description %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: komentar_path(@conn, :edit, @komentar) %>
