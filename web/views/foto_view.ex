@@ -20,4 +20,8 @@ defmodule FotoKerja.FotoView do
         unit_kerja:     data.unit_kerja.name
     }
   end
+
+  def render("user.json", %{data: data}) do
+    data.id
+  end
 end

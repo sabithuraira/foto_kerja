@@ -22,6 +22,7 @@ defmodule FotoKerja.Router do
     resources "/kegiatan", KegiatanController
     resources "/unitkerja", UnitKerjaController
     get "/unitkerja/search/:id", UnitKerjaController , :search
+    get "/foto/user", FotoController, :user
     resources "/foto", FotoController
     resources "/komentar", KomentarController, except: [:index]
     get "/komentar/foto/:id", KomentarController , :index

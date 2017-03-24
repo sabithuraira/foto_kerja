@@ -14,10 +14,56 @@ export default class FullPhotoBox extends React.Component {
             ]
         };
         */
+
+        this.state = {
+            description: '',
+        }
+
         this.closeClick = this.closeClick.bind(this);
+        this.postComment = this.postComment.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     closeClick(event) { this.props.actions.showDetail(false); }
+
+
+    handleInputChange(event) {
+        this.setState({ description: event.target.value });
+    }
+
+    postComment(event) { 
+        var is_change=false;
+
+        if(event.type=="keypress" && event.key=='Enter') is_change=true
+        if(event.type=="click") is_change=true;
+
+        if(is_change){
+            var csrf = document.querySelector("meta[name=csrf]").content;
+            $.ajax({
+                url: "komentar/",
+                dataType: 'json',
+                type: 'POST',
+                headers: {
+                    "X-CSRF-TOKEN": csrf 
+                },
+                data: {
+                    description: this.state.description,
+                    foto_id: this.props.detail.data.id,
+                    user_id: this.props.detail.login_id,
+                },
+                success: function(data) {
+                    console.log(JSON.stringify(data))
+                    this.setState({ description: '' });
+                    this.props.actions.addComment(data);
+                }.bind(this),
+                error: function(xhr, status, err) {
+                    //var err = eval("(" + xhr.responseText + ")");
+                    console.log(xhr.responseText);
+
+                }.bind(this)
+            });
+        }
+    }
 
     componentDidMount() { 
         $.getJSON("komentar/foto/"+this.props.detail.data.id, (response) => { 
@@ -81,9 +127,12 @@ export default class FullPhotoBox extends React.Component {
 
                                         <div className="input-group nav-form">
                                             <input type="text" className="form-control"
+                                                value={this.state.description}
+                                                onChange={this.handleInputChange}
+                                                onKeyPress={this.postComment}
                                                 placeholder="Komentar anda.." />
                                             <div className="input-group-btn">
-                                                <button className="btn btn-default" type="button">
+                                                <button className="btn btn-default" type="button" onClick={this.postComment} >
                                                     <i className="glyphicon glyphicon-floppy-disk"></i>
                                                 </button>
                                             </div>

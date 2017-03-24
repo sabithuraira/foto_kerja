@@ -13,7 +13,7 @@ defmodule FotoKerja.KomentarView do
         user_id:        data.user_id,
         inserted_at:    data.inserted_at,
         updated_at:     data.updated_at,
-        user_name:      data.user.name,
+        user_name:      data.user_id
     }
   end
 end

@@ -6,12 +6,19 @@ export default class ListPhotoBox extends React.Component {
     constructor(props) {
         super(props);
     }
+
     detailComponent() {
         if (this.props.detail.is_show) {
             return <FullPhotoBox detail={this.props.detail} actions={this.props.actions} />;
         } else {
             return null;
         }
+    }
+
+    componentDidMount() { 
+        $.getJSON("foto/user", (response) => { 
+            this.props.actions.setUser(response);
+        });
     }
 
     render() {

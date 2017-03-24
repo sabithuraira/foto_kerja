@@ -14,7 +14,7 @@ defmodule FotoKerja.Komentar do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:description])
+    |> cast(params, [:description, :foto_id, :user_id])
     |> validate_required([:description])
   end
 end

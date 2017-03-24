@@ -3,7 +3,9 @@ import {
   LIST_PHOTO, 
   SHOW_DETAIL, 
   SET_DETAIL,
-  LIST_COMMENT } from '../constants/appConstants';
+  LIST_COMMENT,
+  ADD_COMMENT,
+  SET_USER } from '../constants/appConstants';
 
 const initialState = {
     search_keyword: '',
@@ -35,6 +37,7 @@ const detailState = {
   is_show : false,
   data: {},
   comments: [],
+  login_id: 0,
 }
 
 const detailReducer = (state = detailState, action) => {
@@ -50,6 +53,27 @@ const detailReducer = (state = detailState, action) => {
     case LIST_COMMENT:
       return Object.assign({}, state, {
           comments: action.comments,
+      })
+    case ADD_COMMENT:
+      console.log("masuk add comment");
+      /*
+      state.comments = [
+          ...state.comments,
+          action.comment
+      ]
+
+      console.log(JSON.stringify(state));
+      return ...state
+      */
+      return Object.assign({}, state, {
+          comments: [
+            ...state.comments,
+            action.comment
+        ]
+      })
+    case SET_USER:
+      return Object.assign({}, state, {
+          login_id: action.login_id,
       })
     default:
       return state

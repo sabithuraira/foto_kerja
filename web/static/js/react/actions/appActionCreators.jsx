@@ -20,4 +20,14 @@ export const listComment = (comments) => ({
     comments
 })
 
+export const addComment = (comment) => ({ 
+    type: types.ADD_COMMENT,
+    comment
+})
+
+export const setUser = (login_id) => ({ 
+    type: types.SET_USER,
+    login_id
+})
+
 //export const listData= (id) => ({ type: types.LIST_DATA, id })

@@ -46,6 +46,11 @@ defmodule FotoKerja.FotoController do
     render conn, "pages.json", datas: datas
   end
 
+  def user(conn, _params) do
+    cur_user = Auth.current_user(conn)
+    render conn, "user.json", data: cur_user
+  end
+
   def new(conn, _params) do
     changeset = Foto.changeset(%Foto{})
 
