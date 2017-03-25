@@ -14,7 +14,7 @@ defmodule FotoKerja.Suka do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:is_suka])
+    |> cast(params, [:is_suka, :foto_id, :user_id])
     |> validate_required([:is_suka])
   end
 end

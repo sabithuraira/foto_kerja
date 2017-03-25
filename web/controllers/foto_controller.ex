@@ -42,12 +42,20 @@ defmodule FotoKerja.FotoController do
                 |> Repo.preload(:user)
                 |> Repo.preload(:kegiatan)
                 |> Repo.preload(:unit_kerja)
+                |> Repo.preload(:comments)
+                |> Repo.preload(:suka)
     
     render conn, "pages.json", datas: datas
   end
 
   def user(conn, _params) do
-    cur_user = Auth.current_user(conn)
+    #cur_user = Auth.current_user(conn)
+    cur_user = 
+       case Auth.logged_in?(conn) do
+          true -> Auth.current_user(conn).id
+          _ -> 0
+         end
+
     render conn, "user.json", data: cur_user
   end
 

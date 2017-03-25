@@ -4,17 +4,6 @@ import CommentBox from './CommentBox';
 export default class FullPhotoBox extends React.Component {
     constructor(props) {
         super(props);
-        /*
-        this.state = {
-            comments: [
-                {user: "Sabit", content: "Hai hai", date: "5 Maret 2017"},
-                {user: "Sabit 2", content: "Hai hai 2", date: "6 Maret 2017"},
-                {user: "Sabit 3", content: "Hai hai 3", date: "7 Maret 2017"},
-                {user: "Sabit 3", content: "Hai hai 4", date: "8 Maret 2017"}
-            ]
-        };
-        */
-
         this.state = {
             description: '',
         }
@@ -25,7 +14,6 @@ export default class FullPhotoBox extends React.Component {
     }
 
     closeClick(event) { this.props.actions.showDetail(false); }
-
 
     handleInputChange(event) {
         this.setState({ description: event.target.value });
@@ -49,17 +37,14 @@ export default class FullPhotoBox extends React.Component {
                 data: {
                     description: this.state.description,
                     foto_id: this.props.detail.data.id,
-                    user_id: this.props.detail.login_id,
+                    user_id: this.props.general.login_id,
                 },
                 success: function(data) {
-                    console.log(JSON.stringify(data))
                     this.setState({ description: '' });
                     this.props.actions.addComment(data);
                 }.bind(this),
                 error: function(xhr, status, err) {
-                    //var err = eval("(" + xhr.responseText + ")");
-                    console.log(xhr.responseText);
-
+                    alert('Ooops, terjadi kesalahan.. silahkan ulangi lagi!');
                 }.bind(this)
             });
         }
@@ -96,6 +81,28 @@ export default class FullPhotoBox extends React.Component {
         };
     }
 
+    commentBoxComponent() {
+        if (this.props.general.login_id!=0) {
+            return (<div className="input-group nav-form">
+                        <input type="text" className="form-control"
+                            value={this.state.description}
+                            onChange={this.handleInputChange}
+                            onKeyPress={this.postComment}
+                            placeholder="Komentar anda.." />
+                        <div className="input-group-btn">
+                            <button className="btn btn-default" type="button" onClick={this.postComment} >
+                                <i className="glyphicon glyphicon-floppy-disk"></i>
+                            </button>
+                        </div>
+                    </div>);
+        } else {
+               return (<div className="alert alert-info" role="alert">
+                        Silahkan login untuk menulis komentar
+                        </div>
+               );
+        }
+    }
+
     render() {
         return ( 
             <div className="modal show" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -125,18 +132,7 @@ export default class FullPhotoBox extends React.Component {
                                             <CommentBox comments={this.props.detail.comments} />
                                         </div>
 
-                                        <div className="input-group nav-form">
-                                            <input type="text" className="form-control"
-                                                value={this.state.description}
-                                                onChange={this.handleInputChange}
-                                                onKeyPress={this.postComment}
-                                                placeholder="Komentar anda.." />
-                                            <div className="input-group-btn">
-                                                <button className="btn btn-default" type="button" onClick={this.postComment} >
-                                                    <i className="glyphicon glyphicon-floppy-disk"></i>
-                                                </button>
-                                            </div>
-                                        </div>
+                                        {this.commentBoxComponent()}
                                     </div>
                                 </div>
                             </div>
@@ -150,5 +146,6 @@ export default class FullPhotoBox extends React.Component {
 
 FullPhotoBox.propTypes= {
     detail: PropTypes.object.isRequired,
+    general: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
 };

@@ -5,10 +5,11 @@ import ListPhotoBox from '../components/ListPhotoBox';
 import SearchBox from '../components/SearchBox';
 import * as appActions from '../actions/appActionCreators';
 
-const App = ({photoReducer, detailReducer, actions}) => (
+const App = ({photoReducer, detailReducer, generalReducer, actions}) => (
   <div>
     <SearchBox actions={actions} />
-    <ListPhotoBox  actions={actions} photo={photoReducer} detail={detailReducer} />
+    <ListPhotoBox  actions={actions} photo={photoReducer} 
+        detail={detailReducer} general={generalReducer} />
   </div>
 )
 
@@ -20,7 +21,8 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
     photoReducer: state.photoReducer,
-    detailReducer: state.detailReducer
+    detailReducer: state.detailReducer,
+    generalReducer: state.generalReducer
 });
 
 

@@ -29,10 +29,12 @@ defmodule FotoKerja.KomentarController do
 
     case Repo.insert(changeset) do
       {:ok, komentar} ->
+        data=komentar
+              |> Repo.preload(:user)
         conn
         |> put_status(:created)
         |> put_resp_header("location", komentar_path(conn, :show, komentar))
-        |> render("page.json", data: komentar)
+        |> render("page.json", data: data)
       {:error, changeset} ->
         conn
         |> put_status(:unprocessable_entity)

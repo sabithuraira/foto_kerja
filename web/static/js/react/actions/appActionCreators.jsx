@@ -30,4 +30,9 @@ export const setUser = (login_id) => ({
     login_id
 })
 
+export const setSuka = (id, suka) => ({ 
+    type: types.SET_SUKA,
+    id, suka
+})
+
 //export const listData= (id) => ({ type: types.LIST_DATA, id })

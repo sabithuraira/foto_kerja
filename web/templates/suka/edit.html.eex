@@ -1,6 +1,0 @@
-<h2>Edit suka</h2>
-
-<%= render "form.html", changeset: @changeset,
-                        action: suka_path(@conn, :update, @suka) %>
-
-<%= link "Back", to: suka_path(@conn, :index) %>

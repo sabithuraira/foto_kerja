@@ -1,17 +1,24 @@
-<h2>Login</h2>
+<!--
+<div class="wrapper">
+  <%= form_for @conn, auth_path(@conn, :authenticate), [name: :user, class: "form-signin"], fn f -> %>    
+      <h2 class="form-signin-heading">Please login</h2>
+      <%= text_input f, :username, class: "form-control" %>
+      <%= password_input f, :password, class: "form-control" %>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
+    <% end %>
+</div>
+-->
 
-<%= form_for @conn, auth_path(@conn, :authenticate), [name: :user], fn f -> %>
-  <div class="form-group">
-    <label>Username</label>
-    <%= text_input f, :username, class: "form-control" %>
-  </div>
+<div class="login-page">
 
-  <div class="form-group">
-    <label>Password</label>
-    <%= password_input f, :password, class: "form-control" %>
-  </div>
+  <div class="form">
+    <%= form_for @conn, auth_path(@conn, :authenticate), [name: :user, class: "login-form"], fn f -> %> 
 
-  <div class="form-group">
-    <%= submit "Login", class: "btn btn-primary" %>
+      <%= text_input f, :username, placeholder: "username" %>
+      <%= password_input f, :password, placeholder: "password" %>
+      <button>login</button>
+      <p class="message">Not registered? <a href="#">Create an account</a></p>
+  
+    <% end %>
   </div>
-<% end %>
+</div>

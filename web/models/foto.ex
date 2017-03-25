@@ -8,6 +8,9 @@ defmodule FotoKerja.Foto do
     belongs_to :kegiatan, FotoKerja.Kegiatan
     belongs_to :user, FotoKerja.User
 
+    has_many :comments, FotoKerja.Komentar
+    has_many :suka, FotoKerja.Suka
+
     timestamps()
   end
 

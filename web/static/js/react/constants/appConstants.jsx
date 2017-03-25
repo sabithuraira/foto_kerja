@@ -7,3 +7,4 @@ export const LIST_COMMENT = 'LIST_COMMENT'
 export const ADD_COMMENT = 'ADD_COMMENT'
 
 export const SET_USER = 'SET_USER'
+export const SET_SUKA = 'SET_SUKA'

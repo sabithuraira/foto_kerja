@@ -2,7 +2,7 @@ defmodule FotoKerja.AuthController do
   use FotoKerja.Web, :controller
   
   def login(conn, _params) do
-    render(conn, "login.html")
+    render conn, "login.html"
   end
 
   def authenticate(conn, %{"user" => user_params}) do
@@ -10,7 +10,7 @@ defmodule FotoKerja.AuthController do
       {:ok, user} ->
         conn
         |> put_session(:current_user, user.id)
-        |> put_flash(:info, "Logged in")
+        #|> put_flash(:info, "Berhasil Log in")
         |> redirect(to: "/")
       :error ->
         conn

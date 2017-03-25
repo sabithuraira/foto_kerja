@@ -5,20 +5,13 @@ import {
   SET_DETAIL,
   LIST_COMMENT,
   ADD_COMMENT,
-  SET_USER } from '../constants/appConstants';
+  SET_USER,
+  SET_SUKA
+ } from '../constants/appConstants';
 
 const initialState = {
     search_keyword: '',
-    datas: [
-        /*
-        {label: "Pengolahan SE2017", deskripsi: "Lorem ipsum valar morgulis valar dohaeris"},
-        {label: "Pengolahan SE2017", deskripsi: "Lorem ipsum valar morgulis valar dohaeris"},
-        {label: "Pengolahan SE2017", deskripsi: "Lorem ipsum valar morgulis valar dohaeris"},
-        {label: "Pengolahan SE2017", deskripsi: "Lorem ipsum valar morgulis valar dohaeris"},
-        {label: "Pengolahan SE2017", deskripsi: "Lorem ipsum valar morgulis valar dohaeris"},
-        {label: "Pengolahan SE2017", deskripsi: "Lorem ipsum valar morgulis valar dohaeris"},
-        */
-    ],
+    datas: [],
 }
 
 const photoReducer = (state = initialState, action) => {
@@ -28,24 +21,32 @@ const photoReducer = (state = initialState, action) => {
           search_keyword: action.search_keyword,
           datas: action.datas, 
       })
+    case SET_SUKA:
+      /*
+      return state.map(todo =>
+        todo.id === action.id ?
+          { ...todo, text: action.text } :
+          todo
+      )
+      */
+
+      return Object.assign({}, state, {
+          datas: state.datas.map(data=>
+            data.id===action.id ? Object.assign({}, data, { total_suka: data.total_suka + action.suka }) : data
+          )
+      })
     default:
       return state
   }
 }
 
 const detailState = {
-  is_show : false,
   data: {},
   comments: [],
-  login_id: 0,
 }
 
 const detailReducer = (state = detailState, action) => {
   switch (action.type) {
-    case SHOW_DETAIL:
-      return Object.assign({}, state, {
-          is_show: action.is_show,
-      })
     case SET_DETAIL:
       return Object.assign({}, state, {
           data: action.data,
@@ -55,21 +56,27 @@ const detailReducer = (state = detailState, action) => {
           comments: action.comments,
       })
     case ADD_COMMENT:
-      console.log("masuk add comment");
-      /*
-      state.comments = [
-          ...state.comments,
-          action.comment
-      ]
-
-      console.log(JSON.stringify(state));
-      return ...state
-      */
       return Object.assign({}, state, {
           comments: [
             ...state.comments,
             action.comment
         ]
+      })
+    default:
+      return state
+  }
+}
+
+const generalState = {
+  is_show : false,
+  login_id: 0,
+}
+
+const generalReducer = (state = generalState, action) => {
+  switch (action.type) {
+    case SHOW_DETAIL:
+      return Object.assign({}, state, {
+          is_show: action.is_show,
       })
     case SET_USER:
       return Object.assign({}, state, {
@@ -82,6 +89,7 @@ const detailReducer = (state = detailState, action) => {
 
 const appReducers = combineReducers({ 
   photoReducer,
-  detailReducer
+  detailReducer,
+  generalReducer
 });
 export default appReducers; 

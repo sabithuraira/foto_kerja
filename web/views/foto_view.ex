@@ -17,11 +17,13 @@ defmodule FotoKerja.FotoView do
         updated_at:     data.updated_at,
         user_name:      data.user.name,
         kegiatan:       data.kegiatan.name,
-        unit_kerja:     data.unit_kerja.name
+        unit_kerja:     data.unit_kerja.name,
+        total_komentar: Enum.count(data.comments),
+        total_suka:     Enum.count(data.suka),
     }
   end
 
   def render("user.json", %{data: data}) do
-    data.id
+    data
   end
 end

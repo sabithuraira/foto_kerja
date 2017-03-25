@@ -4,11 +4,36 @@ export default class PhotoBox extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.sukaClick = this.sukaClick.bind(this);
     }
 
     handleClick(event) {
         this.props.actions.showDetail(true);
         this.props.actions.setDetail(this.props.data);
+    }
+
+    sukaClick(event) {
+        var csrf = document.querySelector("meta[name=csrf]").content;
+         $.ajax({
+            url: "suka/",
+            dataType: 'json',
+            type: 'POST',
+            headers: {
+                "X-CSRF-TOKEN": csrf 
+            },
+            data: {
+                is_suka: 1,
+                foto_id: this.props.data.id,
+                user_id: this.props.general.login_id,
+            },
+            success: function(data) {
+                this.props.actions.setSuka(this.props.data.id, data);
+            }.bind(this),
+            error: function(xhr, status, err) {
+                alert('Ooops, terjadi kesalahan.. silahkan ulangi lagi!');
+                console.log(xhr.responseText)
+            }.bind(this)
+        });
     }
 
     render() {
@@ -23,10 +48,10 @@ export default class PhotoBox extends React.Component {
                         <p>{this.props.data.description}</p>
                     </div>
                     <div className="ratings">
-                        <p className="pull-right">15 komentar</p>
+                        <p className="pull-right">{this.props.data.total_komentar} komentar</p>
                         <p>
-                            <span className="glyphicon glyphicon-heart"></span>
-                            <b>15</b>
+                            <span onClick={this.sukaClick} className="glyphicon glyphicon-heart"></span>
+                            <b> {this.props.data.total_suka}</b>
                         </p>
                     </div>
                 </div>
@@ -37,5 +62,6 @@ export default class PhotoBox extends React.Component {
 
 PhotoBox.propTypes= {
     data: PropTypes.object.isRequired,
+    general: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
 };

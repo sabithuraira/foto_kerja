@@ -8,8 +8,8 @@ export default class ListPhotoBox extends React.Component {
     }
 
     detailComponent() {
-        if (this.props.detail.is_show) {
-            return <FullPhotoBox detail={this.props.detail} actions={this.props.actions} />;
+        if (this.props.general.is_show) {
+            return <FullPhotoBox detail={this.props.detail} general={this.props.general} actions={this.props.actions} />;
         } else {
             return null;
         }
@@ -23,7 +23,7 @@ export default class ListPhotoBox extends React.Component {
 
     render() {
         var photoItems = this.props.photo.datas.map((data,index) =>
-            <PhotoBox key={index} data={data} actions={this.props.actions} />
+            <PhotoBox key={index} data={data} general={this.props.general} actions={this.props.actions} />
         );
         
         return ( 
@@ -38,5 +38,6 @@ export default class ListPhotoBox extends React.Component {
 ListPhotoBox.propTypes= {
     photo: PropTypes.object.isRequired,
     detail: PropTypes.object.isRequired,
+    general: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
 };
