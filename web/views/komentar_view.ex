@@ -11,7 +11,7 @@ defmodule FotoKerja.KomentarView do
         description:    data.description,
         foto_id:        data.foto_id,
         user_id:        data.user_id,
-        inserted_at:    data.inserted_at,
+        inserted_at:    Timex.from_now(data.inserted_at),
         updated_at:     data.updated_at,
         user_name:      data.user.name
     }

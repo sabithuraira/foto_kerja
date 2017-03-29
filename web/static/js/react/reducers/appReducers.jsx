@@ -6,7 +6,8 @@ import {
   LIST_COMMENT,
   ADD_COMMENT,
   SET_USER,
-  SET_SUKA
+  SET_SUKA,
+  SET_LABEL_SUKA,
  } from '../constants/appConstants';
 
 const initialState = {
@@ -22,19 +23,11 @@ const photoReducer = (state = initialState, action) => {
           datas: action.datas, 
       })
     case SET_SUKA:
-      /*
-      return state.map(todo =>
-        todo.id === action.id ?
-          { ...todo, text: action.text } :
-          todo
-      )
-      */
-
-      return Object.assign({}, state, {
-          datas: state.datas.map(data=>
-            data.id===action.id ? Object.assign({}, data, { total_suka: data.total_suka + action.suka }) : data
-          )
-      })
+       return Object.assign({}, state, {
+              datas: state.datas.map(data=>
+                data.id===action.id ? Object.assign({}, data, { total_suka: data.total_suka + action.suka }) : data
+              )
+            })
     default:
       return state
   }
@@ -61,6 +54,12 @@ const detailReducer = (state = detailState, action) => {
             ...state.comments,
             action.comment
         ]
+      })
+
+    case SET_LABEL_SUKA:
+      console.log(action.label_like);
+      return Object.assign({}, state, {
+          data: Object.assign({}, state.data, { label_like: action.label_like })
       })
     default:
       return state

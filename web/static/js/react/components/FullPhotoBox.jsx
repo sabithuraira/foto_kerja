@@ -11,12 +11,41 @@ export default class FullPhotoBox extends React.Component {
         this.closeClick = this.closeClick.bind(this);
         this.postComment = this.postComment.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.sukaClick = this.sukaClick.bind(this);
     }
 
     closeClick(event) { this.props.actions.showDetail(false); }
 
     handleInputChange(event) {
         this.setState({ description: event.target.value });
+    }
+
+    sukaClick(event) {
+        var csrf = document.querySelector("meta[name=csrf]").content;
+         $.ajax({
+            url: "suka/",
+            dataType: 'json',
+            type: 'POST',
+            headers: {
+                "X-CSRF-TOKEN": csrf 
+            },
+            data: {
+                is_suka: 1,
+                foto_id: this.props.detail.data.id,
+                user_id: this.props.general.login_id,
+            },
+            success: function(data) {
+                $.getJSON("/suka/"+this.props.detail.data.id, (response) => {
+                    this.props.actions.setSuka(this.props.detail.data.id, data);
+                    this.props.actions.setLabelSuka(response);
+                }); 
+                //this.props.actions.setSuka(this.props.detail.data.id, data);
+            }.bind(this),
+            error: function(xhr, status, err) {
+                alert('Ooops, terjadi kesalahan.. silahkan ulangi lagi!');
+                console.log(xhr.responseText)
+            }.bind(this)
+        });
     }
 
     postComment(event) { 
@@ -125,7 +154,7 @@ export default class FullPhotoBox extends React.Component {
                                             <p>{this.props.detail.data.description}</p>
                                             <div className="ratings">
                                                 <p>
-                                                    <span className="glyphicon glyphicon-heart"></span> Sabit Huraira, Hardianto dan 15 orang lainnya
+                                                    <span onClick={this.sukaClick}  className="glyphicon glyphicon-heart"></span> {this.props.detail.data.label_like}
                                                 </p>
                                             </div>
                                             

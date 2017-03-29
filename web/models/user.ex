@@ -30,7 +30,7 @@ defmodule FotoKerja.User do
   end
 
   def generate_password_and_store_user(changeset) do
-    put_change(changeset, :password, hashpwsalt(changeset.params["password"]))
-      |> Repo.insert
+        put_change(changeset, :password, hashpwsalt(changeset.params["password"]))
+          |> Repo.insert
   end
 end

@@ -20,10 +20,13 @@ defmodule FotoKerja.UserController do
 
     if changeset.valid? do
       new_user = User.generate_password_and_store_user(changeset)
-    
+
+      user = Repo.get_by(User, username: String.downcase(changeset.params["username"]))
+      #Plug.Conn.put_session(:current_user, user.id)
       conn
-        |> put_flash(:info, "Successfully registered and logged in")
-        |> redirect(to: user_path(conn, :index))
+        #|> put_flash(:info, "Successfully registered and logged in")
+        |> put_session(:current_user, user.id)
+        |> redirect(to: page_path(conn, :index))
     else
       render conn, "new.html", changeset: changeset
     end

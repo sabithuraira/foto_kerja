@@ -35,4 +35,9 @@ export const setSuka = (id, suka) => ({
     id, suka
 })
 
+export const setLabelSuka = (label_like) => ({ 
+    type: types.SET_LABEL_SUKA,
+    label_like
+})
+
 //export const listData= (id) => ({ type: types.LIST_DATA, id })
