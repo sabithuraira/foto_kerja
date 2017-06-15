@@ -19,11 +19,6 @@ defmodule FotoKerja.FotoController do
   end
 
   def index(conn, _params) do
-    """
-    foto = Repo.all(Foto)
-    render(conn, "index.html", foto: foto)
-    """
-
     query = 
       case Map.get(_params, "src_term") != nil do
         true -> 

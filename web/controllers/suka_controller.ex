@@ -3,9 +3,6 @@ defmodule FotoKerja.SukaController do
 
   alias FotoKerja.Suka
 
-
-    require Logger
-
   def create(conn, %{} = suka_params) do
     is_exist = Repo.get_by(Suka, foto_id: suka_params["foto_id"], user_id: suka_params["user_id"])
     case is_exist do
@@ -33,7 +30,7 @@ defmodule FotoKerja.SukaController do
   def show(conn, %{"id" => id}) do
     query = from u in Suka,
                 where:  u.foto_id==^id,
-                order_by: [asc: :inserted_at],
+                order_by: [desc: :inserted_at],
                 select: u
 
     datas = Repo.all(query)

@@ -55,9 +55,7 @@ const detailReducer = (state = detailState, action) => {
             action.comment
         ]
       })
-
     case SET_LABEL_SUKA:
-      console.log(action.label_like);
       return Object.assign({}, state, {
           data: Object.assign({}, state.data, { label_like: action.label_like })
       })

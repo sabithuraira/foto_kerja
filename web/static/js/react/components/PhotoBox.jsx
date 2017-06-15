@@ -27,11 +27,7 @@ export default class PhotoBox extends React.Component {
                 user_id: this.props.general.login_id,
             },
             success: function(data) {
-
-                $.getJSON("/suka/"+this.props.data.id, (response) => { 
-                    this.props.actions.setSuka(this.props.data.id, data, response);
-                }); 
-
+                this.props.actions.setSuka(this.props.data.id, data);
             }.bind(this),
             error: function(xhr, status, err) {
                 alert('Ooops, terjadi kesalahan.. silahkan ulangi lagi!');
