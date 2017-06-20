@@ -27,6 +27,23 @@ config :guardian, Guardian,
     secret_key: to_string(Mix.env)<>"h1IMpr*gr4mm3r",
     serializer: FotoKerja.GuardianSerializer
 
+config :ueberauth, Ueberauth,
+  providers: [
+    google: {Ueberauth.Strategy.Google, []},
+    facebook: { Ueberauth.Strategy.Facebook, [
+      default_scope: "email,public_profile,user_friends",
+      display: "popup"
+    ] }
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
+  client_id: System.get_env("FACEBOOK_CLIENT_ID"),
+  client_secret: System.get_env("FACEBOOK_CLIENT_SECRET")
+
+config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  client_id: System.get_env("GOOGLE_CLIENT_ID"),
+  client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

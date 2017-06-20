@@ -1,7 +1,10 @@
 defmodule FotoKerja.PageController do
   use FotoKerja.Web, :controller
+    
+  require Logger
 
   def index(conn, _params) do
+    Logger.info System.get_env("FACEBOOK_CLIENT_ID")
     render conn, "index.html"
   end
 

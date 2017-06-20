@@ -38,6 +38,13 @@ defmodule FotoKerja.Router do
     delete "/logout", AuthController, :logout
   end
 
+  scope "/auth", FotoKerja do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+  end
+
   """
   scope "/api", TodoApi do
     pipe_through :api
