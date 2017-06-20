@@ -17,8 +17,8 @@ defmodule FotoKerja.Auth do
   end
 
   def current_user(conn) do
-    id = Plug.Conn.get_session(conn, :current_user)
-    if id, do: FotoKerja.Repo.get(User, id)
+    user =  Guardian.Plug.current_resource(conn) #Plug.Conn.get_session(conn, :current_user)
+    if user, do: FotoKerja.Repo.get(User, user.id)
   end
 
   def logged_in?(conn), do: !!current_user(conn)

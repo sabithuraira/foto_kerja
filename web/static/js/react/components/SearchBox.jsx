@@ -39,9 +39,9 @@ export default class SearchBox extends React.Component {
             <div className="row">
                 <div className="col-md-1 col-sm-1 col-lg-1">
                     <div className="input-group nav-form">
-                        <button type="button" className="btn btn-default">
+                        <a className="btn btn-default" href="/foto/new">
                             <i className="glyphicon glyphicon-plus"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
 

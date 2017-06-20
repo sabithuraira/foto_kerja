@@ -17,6 +17,16 @@ config :foto_kerja, FotoKerja.Endpoint,
   pubsub: [name: FotoKerja.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :guardian, Guardian,
+    #allowed_algos: ["HS512"], # optional
+    #verify_module: Guardian.JWT,  # optional
+    issuer: "FotoKerja",
+    ttl: { 30, :days },
+    #allowed_drift: 2000,
+    verify_issuer: true, # optional
+    secret_key: to_string(Mix.env)<>"h1IMpr*gr4mm3r",
+    serializer: FotoKerja.GuardianSerializer
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

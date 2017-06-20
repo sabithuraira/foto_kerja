@@ -13,8 +13,14 @@ defmodule FotoKerja.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :browser_session do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+  end
+
+
   scope "/", FotoKerja do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :browser_session] # Use the default browser stack
 
     get "/", PageController, :index
     get "/test", PageController, :test

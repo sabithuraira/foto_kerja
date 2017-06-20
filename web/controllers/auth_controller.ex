@@ -9,8 +9,9 @@ defmodule FotoKerja.AuthController do
     case FotoKerja.Auth.login(user_params, FotoKerja.Repo) do
       {:ok, user} ->
         conn
-        |> put_session(:current_user, user.id)
-        #|> put_flash(:info, "Berhasil Log in")
+        |> Guardian.Plug.sign_in(user)
+        #|> put_session(:current_user, user.id)
+        |> put_flash(:info, "Berhasil Log in")
         |> redirect(to: "/")
       :error ->
         conn
@@ -20,8 +21,8 @@ defmodule FotoKerja.AuthController do
   end
 
   def logout(conn, _) do
-    conn
-      |> delete_session(:current_user)
+    Guardian.Plug.sign_out(conn)
+      #|> delete_session(:current_user)
       |> put_flash(:info, "Logged out")
       |> redirect(to: "/")
   end

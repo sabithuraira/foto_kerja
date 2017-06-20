@@ -7,7 +7,9 @@ defmodule FotoKerja.FotoController do
   alias FotoKerja.Kegiatan
   alias FotoKerja.Auth
 
-  import Comeonin.Bcrypt, only: [hashpwsalt: 1]
+  #import Comeonin.Bcrypt, only: [hashpwsalt: 1]
+  plug Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__]  when action in [:new, :show, :edit, :update, :delete]
+
 
   defp list_uk do
     Repo.all(UnitKerja) |> Enum.map(&{&1.name, &1.id})
@@ -18,11 +20,11 @@ defmodule FotoKerja.FotoController do
     Repo.all(Kegiatan) |> Enum.map(&{&1.name<>" | "<>Integer.to_string(&1.tahun), &1.id})
   end
 
-  def index(conn, _params) do
+  def index(conn, params) do
     query = 
-      case Map.get(_params, "src_term") != nil do
+      case Map.get(params, "src_term") != nil do
         true -> 
-              src_term=_params["src_term"]
+              src_term=params["src_term"]
               from u in Foto,
                     where:  ilike(u.description, ^"%#{src_term}%"),
                     order_by: [desc: :inserted_at],
@@ -129,4 +131,10 @@ defmodule FotoKerja.FotoController do
     |> put_flash(:info, "Foto deleted successfully.")
     |> redirect(to: foto_path(conn, :index))
   end
+
+  def unauthenticated(conn, params) do
+    conn
+      |> put_flash(:error, "Anda belum melakukan autentikasi!")
+      |> redirect(to: auth_path(conn, :login))
+    end
 end
