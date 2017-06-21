@@ -39,11 +39,11 @@ defmodule FotoKerja.AuthController do
   end
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    case UserFromAuth.find_or_create(auth) do
+    case FotoKerja.Auth.find_or_create(auth) do
       {:ok, user} ->
         conn
         |> put_flash(:info, "Successfully authenticated.")
-        |> put_session(:current_user, user)
+        |> Guardian.Plug.sign_in(user)
         |> redirect(to: "/")
       {:error, reason} ->
         conn

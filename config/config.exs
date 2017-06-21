@@ -30,10 +30,7 @@ config :guardian, Guardian,
 config :ueberauth, Ueberauth,
   providers: [
     google: {Ueberauth.Strategy.Google, []},
-    facebook: { Ueberauth.Strategy.Facebook, [
-      default_scope: "email,public_profile,user_friends",
-      display: "popup"
-    ] }
+    facebook: { Ueberauth.Strategy.Facebook, [default_scope: "email,public_profile,user_friends"]}
   ]
 
 config :ueberauth, Ueberauth.Strategy.Facebook.OAuth,
