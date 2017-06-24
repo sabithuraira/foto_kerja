@@ -12,7 +12,7 @@ defmodule FotoKerja.AuthController do
         conn
         |> Guardian.Plug.sign_in(user)
         #|> put_session(:current_user, user.id)
-        |> put_flash(:info, "Berhasil Log in")
+        |> put_flash(:info, "Berhasil Login. Bagikan momen menarik pekerjaan anda! Masukkan foto anda pada FotoKerja")
         |> redirect(to: "/")
       :error ->
         conn
